@@ -1,0 +1,2 @@
+class BodyGroup < ApplicationRecord
+end
