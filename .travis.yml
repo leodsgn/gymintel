@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+  - 2.5.1
+node_js:
+  - 10.6.0
+deploy:
+  provider: heroku
+  api_key:
+    secure: fa3c4b26-90ef-46a0-b596-f8b4cc138bc7
+  app:
+    master: gymintel-staging
+    production: gymintel
+  run:
+    - "rake db:migrate"
+    - restart
+    - "rake cleanup"
