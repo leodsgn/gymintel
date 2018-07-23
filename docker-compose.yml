@@ -4,12 +4,39 @@ services:
     image: postgres
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
+    env_file: 
+      - '.env'
+  redis:
+    image: redis
+    command: ["redis-server", "--appendonly", "yes"]
+    hostname: redis
+    networks:
+      - redis-net
+    volumes:
+      - redis-data:/data
+  webpacker:
+    build: .
+    command: ./bin/webpack-dev-server
+    volumes:
+     - .:/gymintel
+    ports:
+     - "3035:3035"
   web:
     build: .
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/gymintel
     ports:
       - "3000:3000"
     depends_on:
       - db
+      - redis
+      - webpacker
+    env_file: 
+      - '.env'
+
+networks:
+  redis-net:
+
+volumes:
+  redis-data:
