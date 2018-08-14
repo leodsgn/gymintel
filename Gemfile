@@ -28,10 +28,11 @@ group :development do
 end
 
 group :test do
+  gem 'rspec-rails'
+  gem 'guard-rspec'
   gem 'capybara', '>= 2.15', '< 4.0'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
-  gem 'rspec-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

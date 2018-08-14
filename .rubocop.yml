@@ -1,12 +1,12 @@
 AllCops:
   DisplayCopNames: true
   Exclude:
-    - 'bin/*'
-    - 'config.ru'
-    - 'config/environments/*'
-    - 'config/initializers/*'
-    - 'db/**/*'
-    - 'vendor/**/*'
+    - "bin/*"
+    - "config.ru"
+    - "config/environments/*"
+    - "config/initializers/*"
+    - "db/**/*"
+    - "vendor/**/*"
     - Gemfile
   TargetRubyVersion: 2.3
 Metrics/BlockLength:
@@ -19,7 +19,7 @@ Metrics/LineLength:
   Max: 130
   Exclude:
     - Rakefile
-    - 'config/*'
+    - "config/*"
 Rails:
   Enabled: true
 Rails/Delegate:
@@ -29,4 +29,4 @@ Style/Documentation:
 Style/HashSyntax:
   Exclude:
     - Rakefile
-    - '**/*.rake'
+    - "**/*.rake"

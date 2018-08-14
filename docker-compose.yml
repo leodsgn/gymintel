@@ -1,11 +1,11 @@
-version: '3'
+version: "3"
 services:
   db:
     image: postgres
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
-    env_file: 
-      - '.env'
+    env_file:
+      - ".env"
   redis:
     image: redis
     command: ["redis-server", "--appendonly", "yes"]
@@ -18,9 +18,9 @@ services:
     build: .
     command: ./bin/webpack-dev-server
     volumes:
-     - .:/gymintel
+      - .:/gymintel
     ports:
-     - "3035:3035"
+      - "3035:3035"
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -32,11 +32,9 @@ services:
       - db
       - redis
       - webpacker
-    env_file: 
-      - '.env'
-
-networks:
+    env_file:
+      - ".env"
+networks: 
   redis-net:
-
 volumes:
   redis-data:

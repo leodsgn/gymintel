@@ -1,19 +1,72 @@
 import React, { Component } from "react";
-import { Grid, Row, Col } from "react-bootstrap";
+import PropTypes from "prop-types";
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem
+} from "reactstrap";
 
-export default class Header extends Component {
+class Header extends Component {
+    constructor(props) {
+        super(props);
+
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+            isOpen: false
+        };
+    }
+    toggle() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
     render() {
         return (
-            <Grid fluid>
-                <Row className="show-grid">
-                    <Col xs={12} md={8}>
-                        <code>&lt;{"Col xs={12} md={8}"} /&gt;</code>
-                    </Col>
-                    <Col xs={6} md={4}>
-                        <code>&lt;{"Col xs={6} md={4}"} /&gt;</code>
-                    </Col>
-                </Row>
-            </Grid>
+            <Navbar color="light" light expand="md">
+                <NavbarBrand href="/">Gymintel</NavbarBrand>
+                <NavbarToggler onClick={this.toggle} />
+                <Collapse isOpen={this.state.isOpen} navbar>
+                    <Nav className="ml-auto" navbar>
+                        <NavItem>
+                            <NavLink href="/components/">Components</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="https://github.com/reactstrap/reactstrap">
+                                GitHub
+                            </NavLink>
+                        </NavItem>
+                        <UncontrolledDropdown nav inNavbar>
+                            <DropdownToggle nav caret>
+                                Options
+                            </DropdownToggle>
+                            <DropdownMenu right>
+                                <DropdownItem>Option 1</DropdownItem>
+                                <DropdownItem>Option 2</DropdownItem>
+                                <DropdownItem divider />
+                                <DropdownItem>Reset</DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                    </Nav>
+                </Collapse>
+            </Navbar>
         );
     }
 }
+
+Header.defaultProps = {
+    invisibleBackground: false
+};
+
+Header.proptypes = {
+    invisibleBackground: PropTypes.bool.isRequired
+};
+
+export default Header;
